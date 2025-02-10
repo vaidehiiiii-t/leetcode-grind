@@ -10,3 +10,29 @@ class Solution {
             return s;
         }
     };
+
+    //approach 2 using stack
+
+    class Solution {
+        public:
+            std::string clearDigits(const std::string& s) {
+                std::stack<char> stack;
+        
+                for (char ch : s) {
+                    if (isdigit(ch) && !stack.empty()) {
+                        stack.pop(); 
+                    } else {
+                        stack.push(ch); 
+                    }
+                }
+        
+                std::string result;
+                while (!stack.empty()) {
+                    result += stack.top(); 
+                    stack.pop();
+                }
+        
+                std::reverse(result.begin(), result.end()); 
+                return result;
+            }
+        };
