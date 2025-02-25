@@ -23,7 +23,7 @@ class Solution {
 
 
     //Approach for Counting Subarrays with Odd Sum
-    
+
     class Solution {
         public:
             int numOfSubarrays(vector<int>& arr) {
@@ -41,3 +41,26 @@ class Solution {
                 }return r;
             }
         };
+
+        //Dynamic Programming (DP) approach to solve the problem.
+        class Solution {
+            public:
+                int numOfSubarrays(vector<int>& arr) {
+                    const int MOD = 1e9 + 7;
+                    long long dp_odd = 0, dp_even = 1, result = 0;
+            
+                    for (int a : arr) {
+                        if (a % 2 == 0) {
+                            dp_odd = dp_odd;
+                            
+                            dp_even = (dp_even + 1) % MOD;
+                        } else {
+                            long long temp = dp_odd;
+                            dp_odd = dp_even;
+                            dp_even = (temp + 1) % MOD;
+                        }
+                        result = (result + dp_odd) % MOD;
+                    }
+                    return result;
+                }
+            };
